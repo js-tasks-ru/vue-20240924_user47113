@@ -1,9 +1,13 @@
-import { defineComponent } from 'vue'
+import { defineComponent, reactive, watch, ref } from 'vue'
 
 export default defineComponent({
   name: 'CounterApp',
 
-  setup() {},
+  setup() {
+    const counter = reactive({ value: 0 })
+
+    return { counter }
+  },
 
   template: `
     <div class="counter">
@@ -11,15 +15,19 @@ export default defineComponent({
         class="button button--secondary"
         type="button"
         aria-label="Decrement"
-        disabled
+        :disabled="counter.value <= 0"
+        v-on:click="counter.value--"
+        
       >➖</button>
 
-      <span class="count" data-testid="count">0</span>
+      <span class="count" data-testid="count">{{counter.value}}</span>
 
       <button
         class="button button--secondary"
         type="button"
         aria-label="Increment"
+        :disabled="counter.value >= 5"
+        v-on:click="counter.value++"
       >➕</button>
     </div>
   `,
