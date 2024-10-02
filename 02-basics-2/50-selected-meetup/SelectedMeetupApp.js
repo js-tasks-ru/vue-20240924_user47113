@@ -73,7 +73,7 @@ export default defineComponent({
               value="1"
               v-model="meetup.id"
             />
-            <label for="meetup-id-2" class="radio-group__label">1</label>
+            <label for="meetup-id-1" class="radio-group__label">1</label>
           </div>       
           <div class="radio-group__button">
             <input
