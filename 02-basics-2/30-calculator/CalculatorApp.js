@@ -1,4 +1,4 @@
-import { defineComponent, ref, watch } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
 
 export default defineComponent({
   name: 'CalculatorApp',
@@ -6,33 +6,53 @@ export default defineComponent({
   setup() {
     const a = ref(0)
     const b = ref(0)
-    const result = ref(0)
+
     const operand = ref('')
 
-    watch([a, b, operand], async () => {
-      console.log(`Вы выбрали ${operand.value} в режиме ввода`)
+    // watch([a, b, operand], async () => {
+    //   console.log(`Вы выбрали ${operand.value} в режиме ввода`)
+    //   switch (operand.value) {
+    //     case 'sum': {
+    //       result.value = a.value + b.value
+    //       break
+    //     }
+    //     case 'subtract': {
+    //       result.value = a.value - b.value
+    //       break
+    //     }
+    //     case 'multiply': {
+    //       result.value = a.value * b.value
+    //       break
+    //     }
+    //     case 'divide': {
+    //       result.value = a.value / b.value
+    //       break
+    //     }
+    //     default: {
+    //       result.value = NaN
+    //     }
+    //   }
+    // })
+    const result = computed(() => {
       switch (operand.value) {
         case 'sum': {
-          result.value = a.value + b.value
-          break
+          return a.value + b.value
         }
         case 'subtract': {
-          result.value = a.value - b.value
-          break
+          return a.value - b.value
         }
         case 'multiply': {
-          result.value = a.value * b.value
-          break
+          return a.value * b.value
         }
         case 'divide': {
-          result.value = a.value / b.value
-          break
+          return a.value / b.value
         }
         default: {
-          result.value = NaN
+          return NaN
         }
       }
     })
+
     return {
       a,
       b,

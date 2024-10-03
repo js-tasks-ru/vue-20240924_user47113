@@ -8,20 +8,7 @@ export default defineComponent({
     const weatherData = getWeatherData()
 
     function isDay(localTime, sunRise, sunSet) {
-      let localtime = new Date()
-      localtime.setHours(localTime)
-
-      return parseTime(sunRise) < parseTime(localTime) && parseTime(sunSet) > parseTime(localTime)
-    }
-
-    function parseTime(time) {
-      // функция для парсинга времени в формате hh:mm.
-
-      let DateObject = new Date()
-      DateObject.setHours(time.split(':')[0], time.split(':')[1])
-      // console.log('Исходные данные:', time)
-      // console.log('Время в миллисекундах:', DateObject.getTime())
-      return DateObject.getTime() // возвращает значение в миллисекундах.
+      return sunRise < localTime && sunSet > localTime
     }
 
     function getTempInCelc(kelvin) {

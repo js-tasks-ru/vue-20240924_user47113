@@ -13,7 +13,7 @@ const App = defineComponent({
   },
 
   template: `
-    <div>Сегодня {{printDateAsLocalDate()}}</div>
+    <div>Сегодня {{ printDateAsLocalDate() }}</div>
   `,
 })
 
