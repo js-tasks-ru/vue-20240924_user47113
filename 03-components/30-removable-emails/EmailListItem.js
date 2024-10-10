@@ -4,6 +4,11 @@ export default defineComponent({
   name: 'EmailListItem',
 
   props: {
+    emailId: {
+      type: Number,
+      required: true,
+    },
+
     email: {
       type: String,
       required: true,
@@ -15,10 +20,23 @@ export default defineComponent({
     },
   },
 
+  emits: ['removeEmail'],
+
+  setup(props, { emit }) {
+    function handleClickRemoveEmail(newValue) {
+      console.log('Click', newValue)
+      emit('removeEmail', newValue)
+    }
+
+    return {
+      handleClickRemoveEmail,
+    }
+  },
+
   template: `
     <li :class="{ marked }">
       {{ email }}
-      <button type="button" aria-label="Удалить" @click.stop>❌</button>
+      <button type="button" aria-label="Удалить" @click="handleClickRemoveEmail(emailId)">❌</button>
     </li>
   `,
 })
