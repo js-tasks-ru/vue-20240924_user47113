@@ -20,12 +20,11 @@ export default defineComponent({
     },
   },
 
-  emits: ['removeEmail'],
+  emits: ['removeThisEmail'],
 
   setup(props, { emit }) {
     function handleClickRemoveEmail(newValue) {
-      console.log('Click', newValue)
-      emit('removeEmail', newValue)
+      emit('removeThisEmail')
     }
 
     return {
@@ -36,7 +35,7 @@ export default defineComponent({
   template: `
     <li :class="{ marked }">
       {{ email }}
-      <button type="button" aria-label="Удалить" @click="handleClickRemoveEmail(emailId)">❌</button>
+      <button type="button" aria-label="Удалить" @click="handleClickRemoveEmail">❌</button>
     </li>
   `,
 })
