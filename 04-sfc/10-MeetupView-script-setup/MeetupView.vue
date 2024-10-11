@@ -1,24 +1,32 @@
-<script>
-import { defineComponent } from 'vue'
-import { UiAlert, UiContainer } from '@shgk/vue-course-ui'
+<script setup>
+import { computed } from 'vue'
+import { UiAlert, UiContainer} from '@shgk/vue-course-ui'
 import MeetupAgenda from './MeetupAgenda.vue'
 import MeetupDescription from './MeetupDescription.vue'
 import MeetupCover from './MeetupCover.vue'
 import MeetupInfo from './MeetupInfo.vue'
 
-export default defineComponent({
-  name: 'MeetupView',
-
-  components: {
-    UiAlert,
-    UiContainer,
-  },
+const props= defineProps({
+  meetup: {
+      type: Object,
+      required: true,
+    },
 })
+
+defineOptions({
+  name: 'MeetupView'
+})
+
+const agendaLength = computed(() => {
+      const arr = props.meetup.agenda
+      return arr.length
+    })
 </script>
 
 <template>
   <div>
     <!-- Обложка митапа -->
+    <MeetupCover :title="meetup.title" :image="meetup.image"></MeetupCover>
 
     <UiContainer>
       <div class="meetup">
@@ -26,16 +34,22 @@ export default defineComponent({
           <h2>Описание</h2>
 
           <!-- Описание митапа -->
+          <MeetupDescription :description="meetup.description"></MeetupDescription>
 
           <h2>Программа</h2>
 
           <!-- Программа митапа -->
+          <template v-if="agendaLength > 0" >
+            <MeetupAgenda :agenda="meetup.agenda"></MeetupAgenda>
+          </template>
           <!-- Или при пустой программе - сообщение "Программа пока пуста..." в UiAlert -->
-          <UiAlert></UiAlert>
+          <template v-else >
+              <UiAlert text="Программа пока пуста..."></UiAlert>
+            </template>
         </div>
         <div class="meetup__aside">
           <!-- Краткая информация о митапе -->
-
+          <MeetupInfo :organizer="meetup.organizer" :place="meetup.place" :date="meetup.date"></MeetupInfo>
           <div class="meetup__aside-buttons"></div>
         </div>
       </div>
@@ -50,8 +64,8 @@ export default defineComponent({
   margin: 48px 0 0;
 }
 
-.meetup__content {
-}
+/* .meetup__content {
+} */
 
 .meetup__aside {
   margin: 40px 0;
