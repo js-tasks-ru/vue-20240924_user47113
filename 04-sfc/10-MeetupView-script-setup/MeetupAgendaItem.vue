@@ -9,9 +9,7 @@ const props = defineProps({
   }
 })
 
-defineOptions({
-  name: 'MeetupAgendaItem',
-})
+
 
 const agendaItemDefaultTitles = {
   registration: 'Регистрация',

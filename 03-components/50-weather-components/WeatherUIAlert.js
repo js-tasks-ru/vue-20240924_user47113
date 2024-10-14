@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, toRef } from 'vue'
 
 export default defineComponent({
   name: 'WeatherUIAlert',
@@ -8,6 +8,7 @@ export default defineComponent({
       type: String,
       required: true,
     },
+
     description: {
       type: String,
       default: '',
@@ -15,19 +16,19 @@ export default defineComponent({
   },
 
   setup(props) {
-    const sender = props.sender
-    const description = props.description
+    const senderTpl = toRef(props.sender)
+    const descriptionTpl = toRef(props.description)
 
     return {
-      sender,
-      description,
+      senderTpl,
+      descriptionTpl,
     }
   },
 
   template: `
         <div class="weather-alert">
             <span class="weather-alert__icon">⚠️</span>
-            <span class="weather-alert__description">{{ sender }}: {{ description }}</span>
+            <span class="weather-alert__description">{{ senderTpl }}: {{ descriptionTpl }}</span>
         </div>
   `,
 })

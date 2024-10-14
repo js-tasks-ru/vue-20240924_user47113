@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, toRef } from 'vue'
 
 export default defineComponent({
   name: 'WeatherUICardTitle',
@@ -8,6 +8,7 @@ export default defineComponent({
       type: String,
       required: true,
     },
+
     time: {
       type: String,
       default: '',
@@ -15,22 +16,22 @@ export default defineComponent({
   },
 
   setup(props) {
-    const place = props.place
-    const time = props.time
+    const placeTpl = toRef(props.place)
+    const timeTpl = toRef(props.time)
 
     return {
-      place,
-      time,
+      placeTpl,
+      timeTpl,
     }
   },
 
   template: `
           <div>
             <h2 class="weather-card__name">
-              {{ place }}
+              {{ placeTpl }}
             </h2>
             <div class="weather-card__time">
-              {{ time }}
+              {{ timeTpl }}
             </div>
           </div>
     `,

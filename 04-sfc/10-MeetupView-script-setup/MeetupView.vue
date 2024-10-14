@@ -13,9 +13,7 @@ const props= defineProps({
     },
 })
 
-defineOptions({
-  name: 'MeetupView'
-})
+
 
 const agendaLength = computed(() => {
       const arr = props.meetup.agenda

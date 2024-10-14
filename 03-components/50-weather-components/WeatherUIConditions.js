@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, toRef, computed } from 'vue'
 import { WeatherConditionIcons } from './weather.service.ts'
 
 export default defineComponent({
@@ -11,9 +11,9 @@ export default defineComponent({
   },
 
   setup(props) {
-    const tempInC = getTempInCelc(props.temperature)
-    const icon = WeatherConditionIcons[props.iconId]
-    const title = props.title
+    const tempInC = computed(() => getTempInCelc(props.temperature))
+    const icon = computed(() => WeatherConditionIcons[props.iconId])
+    const titleTpl = toRef(props.title)
 
     function getTempInCelc(kelvin) {
       const celc = kelvin - 273.15
@@ -24,13 +24,13 @@ export default defineComponent({
       //   getTempInCelc,
       tempInC,
       icon,
-      title,
+      titleTpl,
     }
   },
 
   template: `
         <div class="weather-conditions">
-            <div class="weather-conditions__icon" :title="title"> {{icon}}</div>
+            <div class="weather-conditions__icon" :title="titleTpl"> {{icon}}</div>
             <div class="weather-conditions__temp">{{tempInC}} °C</div>
         </div>
   

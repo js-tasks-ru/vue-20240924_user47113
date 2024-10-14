@@ -9,9 +9,7 @@ defineProps({
     },
   })
 
-defineOptions({
-  name: 'MeetupAgenda'
-})
+
 
 
 </script>

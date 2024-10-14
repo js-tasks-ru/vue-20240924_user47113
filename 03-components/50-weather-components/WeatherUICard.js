@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, toRef } from 'vue'
 import WeatherUIAlert from './WeatherUIAlert.js'
 import WeatherUIConditions from './WeatherUIConditions.js'
 import WeatherUIDetails from './WeatherUIDetails.js'
@@ -6,12 +6,6 @@ import WeatherUICardTitle from './WeatherUICardTitle.js'
 export default defineComponent({
   name: 'WeatherUICard',
 
-  props: {
-    weatherItemData: {
-      type: Object,
-      required: true,
-    },
-  },
   components: {
     WeatherUIAlert,
     WeatherUIConditions,
@@ -19,8 +13,15 @@ export default defineComponent({
     WeatherUICardTitle,
   },
 
+  props: {
+    weatherItemData: {
+      type: Object,
+      required: true,
+    },
+  },
+
   setup(props) {
-    const item = props.weatherItemData
+    const item = toRef(props.weatherItemData)
     function isDay(localTime, sunRise, sunSet) {
       return sunRise < localTime && sunSet > localTime
     }

@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, toRef, computed } from 'vue'
 export default defineComponent({
   name: 'WeatherUIDetails',
 
@@ -6,7 +6,7 @@ export default defineComponent({
     pressure: { type: Number, default: 0 },
     humidity: { type: Number, default: 0 },
     clouds: { type: Number, default: 0 },
-    wind_speed: { type: Number, default: 0 },
+    windSpeed: { type: Number, default: 0 },
   },
 
   setup(props) {
@@ -15,15 +15,15 @@ export default defineComponent({
       return mmHg.toFixed(0)
     }
 
-    const humidity = props.humidity
-    const clouds = props.clouds
-    const wind_speed = props.wind_speed
-    const pressureInmmHg = getPressureInmmHg(props.pressure)
+    const humidityTpl = toRef(props.humidity)
+    const cloudsTpl = toRef(props.clouds)
+    const windSpeedTpl = toRef(props.wind_speed)
+    const pressureInmmHg = computed(() => getPressureInmmHg(props.pressure))
     return {
       pressureInmmHg,
-      humidity,
-      clouds,
-      wind_speed,
+      humidityTpl,
+      cloudsTpl,
+      windSpeedTpl,
     }
   },
 
@@ -35,15 +35,15 @@ export default defineComponent({
             </div>
             <div class="weather-details__item">
               <div class="weather-details__item-label">Влажность, %</div>
-              <div class="weather-details__item-value">{{humidity}}</div>
+              <div class="weather-details__item-value">{{humidityTpl}}</div>
             </div>
             <div class="weather-details__item">
               <div class="weather-details__item-label">Облачность, %</div>
-              <div class="weather-details__item-value">{{clouds}}</div>
+              <div class="weather-details__item-value">{{cloudsTpl}}</div>
             </div>
             <div class="weather-details__item">
               <div class="weather-details__item-label">Ветер, м/с</div>
-              <div class="weather-details__item-value">{{wind_speed}}</div>
+              <div class="weather-details__item-value">{{windSpeedTpl}}</div>
             </div>
           </div>
     
