@@ -6,7 +6,7 @@ export default defineComponent({
     pressure: { type: Number, default: 0 },
     humidity: { type: Number, default: 0 },
     clouds: { type: Number, default: 0 },
-    windSpeed: { type: Number, default: 0 },
+    wind_speed: { type: Number, default: 0 },
   },
 
   setup(props) {
