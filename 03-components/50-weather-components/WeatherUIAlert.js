@@ -16,8 +16,8 @@ export default defineComponent({
   },
 
   setup(props) {
-    const senderTpl = toRef(props.sender)
-    const descriptionTpl = toRef(props.description)
+    const senderTpl = toRef(() => props.sender)
+    const descriptionTpl = toRef(() => props.description)
 
     return {
       senderTpl,

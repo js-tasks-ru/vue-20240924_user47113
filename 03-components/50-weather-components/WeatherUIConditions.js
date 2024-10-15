@@ -13,7 +13,7 @@ export default defineComponent({
   setup(props) {
     const tempInC = computed(() => getTempInCelc(props.temperature))
     const icon = computed(() => WeatherConditionIcons[props.iconId])
-    const titleTpl = toRef(props.title)
+    const titleTpl = toRef(() => props.title)
 
     function getTempInCelc(kelvin) {
       const celc = kelvin - 273.15

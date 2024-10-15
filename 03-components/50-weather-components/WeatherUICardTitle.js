@@ -16,8 +16,8 @@ export default defineComponent({
   },
 
   setup(props) {
-    const placeTpl = toRef(props.place)
-    const timeTpl = toRef(props.time)
+    const placeTpl = toRef(() => props.place)
+    const timeTpl = toRef(() => props.time)
 
     return {
       placeTpl,

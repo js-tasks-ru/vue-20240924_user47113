@@ -21,7 +21,7 @@ export default defineComponent({
   },
 
   setup(props) {
-    const item = toRef(props.weatherItemData)
+    const item = toRef(() => props.weatherItemData)
     function isDay(localTime, sunRise, sunSet) {
       return sunRise < localTime && sunSet > localTime
     }

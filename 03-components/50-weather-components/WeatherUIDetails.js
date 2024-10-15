@@ -15,9 +15,9 @@ export default defineComponent({
       return mmHg.toFixed(0)
     }
 
-    const humidityTpl = toRef(props.humidity)
-    const cloudsTpl = toRef(props.clouds)
-    const windSpeedTpl = toRef(props.wind_speed)
+    const humidityTpl = toRef(() => props.humidity)
+    const cloudsTpl = toRef(() => props.clouds)
+    const windSpeedTpl = toRef(() => props.wind_speed)
     const pressureInmmHg = computed(() => getPressureInmmHg(props.pressure))
     return {
       pressureInmmHg,
